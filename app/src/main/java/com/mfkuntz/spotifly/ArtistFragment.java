@@ -1,5 +1,6 @@
 package com.mfkuntz.spotifly;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import kaaes.spotify.webapi.android.SpotifyApi;
+import kaaes.spotify.webapi.android.SpotifyService;
+import kaaes.spotify.webapi.android.models.ArtistsPager;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class ArtistFragment extends Fragment {
 
@@ -21,8 +29,11 @@ public class ArtistFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-
+    public void onStart(){
+        super.onStart();
+        updateArtist();
     }
 
     @Override
@@ -49,6 +60,44 @@ public class ArtistFragment extends Fragment {
         return rootView;
     }
 
+    private void updateArtist(){
+        GetArtistDataTask task = new GetArtistDataTask();
 
+        task.execute("Coldplay");
+    }
+
+    class GetArtistDataTask extends AsyncTask<String, Void, String[]> {
+
+
+        @Override
+        protected String[] doInBackground(String... params) {
+
+            SpotifyApi api = new SpotifyApi();
+            SpotifyService service = api.getService();
+
+            service.searchArtists(params[0], new Callback<ArtistsPager>() {
+                @Override
+                public void success(ArtistsPager artistsPager, Response response) {
+                    artistsPager.artists.items
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+
+            return new String[0];
+        }
+
+        protected void onPostExecute(String[] results){
+            artistAdapter.clear();
+            artistAdapter.addAll(results);
+
+            super.onPostExecute(results);
+        }
+    }
 
 }
+
