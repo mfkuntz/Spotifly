@@ -74,6 +74,9 @@ public class ArtistFragment extends Fragment {
                 String id = (String) view.getTag();
 
                 Intent artistViewIntent = new Intent(getActivity(), ArtistView.class);
+
+                artistViewIntent.putExtra(Intent.EXTRA_TEXT, id);
+
                 startActivity(artistViewIntent);
             }
         };
