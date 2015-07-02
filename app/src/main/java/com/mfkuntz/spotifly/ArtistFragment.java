@@ -1,6 +1,7 @@
 package com.mfkuntz.spotifly;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -64,6 +66,19 @@ public class ArtistFragment extends Fragment {
 
         ListView list = (ListView) rootView.findViewById(R.id.artist_list);
         list.setAdapter(artistAdapter);
+
+
+        AdapterView.OnItemClickListener listItemClickedHandler = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String id = (String) view.getTag();
+
+                Intent artistViewIntent = new Intent(getActivity(), ArtistView.class);
+                startActivity(artistViewIntent);
+            }
+        };
+
+        list.setOnItemClickListener(listItemClickedHandler);
 
 
         EditText textbox = (EditText) rootView.findViewById(R.id.artist_text);

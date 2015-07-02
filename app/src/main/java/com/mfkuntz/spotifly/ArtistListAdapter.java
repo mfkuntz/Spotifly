@@ -6,6 +6,7 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class ArtistListAdapter extends ArrayAdapter<Artist> {
             TextView temp = (TextView) v.findViewById(R.id.list_item_artist_textview);
             temp.setText(artist.name);
 
+            v.setTag(artist.id);
 
             ImageView image = (ImageView) v.findViewById(R.id.list_item_artist_image);
 
