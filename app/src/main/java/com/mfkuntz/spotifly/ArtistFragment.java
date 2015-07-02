@@ -1,5 +1,6 @@
 package com.mfkuntz.spotifly;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
@@ -28,7 +30,7 @@ import retrofit.client.Response;
 
 public class ArtistFragment extends Fragment {
 
-    private ArrayAdapter<String> artistAdapter;
+    private ArtistListAdapter artistAdapter;
 
     public ArtistFragment() {
         // Required empty public constructor
@@ -54,11 +56,10 @@ public class ArtistFragment extends Fragment {
 
 
 
-        artistAdapter = new ArrayAdapter<>(
+        artistAdapter = new ArtistListAdapter(
                 getActivity(),
                 R.layout.list_item_artist,
-                R.id.list_item_artist_textview,
-                new ArrayList<String>()
+                new ArrayList<Artist>()
         );
 
         ListView list = (ListView) rootView.findViewById(R.id.artist_list);
@@ -97,13 +98,9 @@ public class ArtistFragment extends Fragment {
         service.searchArtists(artistName, new Callback<ArtistsPager>() {
             @Override
             public void success(ArtistsPager artistsPager, Response response) {
-                ArrayList<String> artistNames = new ArrayList<>();
 
-                for(Artist artist : artistsPager.artists.items){
-                    artistNames.add(artist.name);
-                }
                 artistAdapter.clear();
-                artistAdapter.addAll(artistNames);
+                artistAdapter.addAll(artistsPager.artists.items);
 
             }
 
