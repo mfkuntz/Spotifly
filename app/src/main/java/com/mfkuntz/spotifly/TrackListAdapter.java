@@ -15,14 +15,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.Image;
+import kaaes.spotify.webapi.android.models.Track;
 
-public class ArtistListAdapter extends ArrayAdapter<Artist> {
+public class TrackListAdapter extends ArrayAdapter<Track> {
 
     private static int Pixels = 0;
 
-    public ArtistListAdapter(Context context, int resource, List<Artist> objects) {
+    public TrackListAdapter(Context context, int resource, List<Track> objects) {
         super(context, resource, objects);
     }
 
@@ -33,19 +33,19 @@ public class ArtistListAdapter extends ArrayAdapter<Artist> {
         if (v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.list_item_artist, null);
+            v = vi.inflate(R.layout.list_item_album, null);
         }
 
-        Artist artist = getItem(position);
+        Track track = getItem(position);
 
-        if (artist != null){
+        if (track != null){
 
-            TextView temp = (TextView) v.findViewById(R.id.list_item_artist_textview);
-            temp.setText(artist.name);
+            TextView temp = (TextView) v.findViewById(R.id.list_item_track_textview);
+            temp.setText(track.name + "\n" + track.album.name);
 
-            v.setTag(artist.id);
+            v.setTag(track.id);
 
-            if (artist.images.size() == 0){
+            if (track.album.images.size() == 0){
                 return v;
             }
 
@@ -53,7 +53,7 @@ public class ArtistListAdapter extends ArrayAdapter<Artist> {
 
             String imgUrl = "";
             //todo this only downloads the first image that fits, probably the biggest one
-            for (Image image : artist.images){
+            for (Image image : track.album.images){
                 if (image.height >= size){
                     imgUrl = image.url;
                     break;
@@ -61,7 +61,7 @@ public class ArtistListAdapter extends ArrayAdapter<Artist> {
             }
             //todo handle case where image is smaller than requested size
 
-            ImageView imageView = (ImageView) v.findViewById(R.id.list_item_artist_image);
+            ImageView imageView = (ImageView) v.findViewById(R.id.list_item_album_image);
 
             Picasso.with(getContext())
                     .load(imgUrl)

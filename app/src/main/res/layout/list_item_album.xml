@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:minHeight="?android:listPreferredItemHeight"
+        android:gravity="center_vertical"
+        android:paddingRight="7.5dp"
+        android:paddingBottom="7.5dp"
+
+        android:src="@drawable/ic_launcher"
+        android:id="@+id/list_item_album_image"
+        />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="?android:listPreferredItemHeight"
+        android:gravity="center_vertical"
+
+        android:text="This is a test track \n This is a test album"
+        android:id="@+id/list_item_track_textview"
+        />
+
+
+</LinearLayout>
