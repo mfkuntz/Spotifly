@@ -15,10 +15,13 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 /**
- * Fixes a discrepency between the Spotify API and its wrapper
+ * Fixes a discrepancy between the Spotify API and its wrapper
  */
 public class SpotifyFixer {
 
+    /*
+    This is a wrapper for the getTopTracks method. It adds in the missing parameter of country code.
+     */
     public static void getTopTracks(String artistID, final TrackListAdapter trackListAdapter){
         final String LOG_TAG = "SpotifyFixer";
 

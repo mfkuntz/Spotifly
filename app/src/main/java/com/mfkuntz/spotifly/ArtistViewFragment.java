@@ -60,7 +60,6 @@ public class ArtistViewFragment extends Fragment {
 
         SpotifyFixer.getTopTracks(message, trackListAdapter);
 
-
     }
 
 

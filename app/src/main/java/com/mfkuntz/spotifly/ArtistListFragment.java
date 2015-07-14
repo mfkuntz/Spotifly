@@ -36,10 +36,9 @@ public class ArtistListFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
     public void onStart(){
         super.onStart();
-
-//        updateArtist("Coldplay");
     }
 
     @Override
@@ -47,9 +46,6 @@ public class ArtistListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-
-
 
         artistAdapter = new ArtistListAdapter(
                 getActivity(),
